@@ -1,4 +1,5 @@
 require 'redis'
+require 'json'
 
 class OfflineAssigner
   def initialize(key)
@@ -10,7 +11,7 @@ class OfflineAssigner
   end
 
   def call
-    redis.publish 'equipment_status', { equipment_id: equipment_id, status: 'offline' }
+    redis.publish 'equipment_status', { equipment_id: equipment_id, status: 'offline' }.to_json
   end
 
   private

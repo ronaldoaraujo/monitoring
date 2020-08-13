@@ -1,4 +1,5 @@
 require 'redis'
+require 'json'
 
 class OnlineAssigner
   extend Forwardable
@@ -24,7 +25,7 @@ class OnlineAssigner
 
     return if was_online
 
-    redis.publish 'equipment_status', { equipment_id: equipment_id, status: 'online' }
+    redis.publish 'equipment_status', { equipment_id: equipment_id, status: 'online' }.to_json
   end
 
   private
